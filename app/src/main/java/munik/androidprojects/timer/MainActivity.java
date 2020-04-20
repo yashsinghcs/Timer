@@ -1,6 +1,7 @@
 package munik.androidprojects.timer;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -9,6 +10,20 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     SeekBar timerCount;
     TextView counter;
+
+    public void timer() {
+        CountDownTimer countDownTimer = new CountDownTimer(10000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
