@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateCounter(int counterInSec) {
         int minutes = counterInSec / 60;
         int sec = counterInSec - minutes * 60;
-        counter.setText(Integer.toString(minutes) + ":" + Integer.toString(sec));
+        counter.setText((minutes > 9 ? Integer.toString(minutes) : "0" + Integer.toString(minutes)) + ":" + (sec > 9 ? Integer.toString(sec) : "0" + Integer.toString(sec)));
 
     }
 }
