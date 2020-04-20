@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
     SeekBar timerCount;
     TextView counter;
 
-    public void timer() {
+    public void timer(int counterInSec) {
         CountDownTimer countDownTimer = new CountDownTimer(10000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 updateCounter(progress);
+                timer(progress);
 
             }
 
