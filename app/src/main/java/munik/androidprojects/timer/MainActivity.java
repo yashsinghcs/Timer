@@ -2,6 +2,7 @@ package munik.androidprojects.timer;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -11,10 +12,12 @@ public class MainActivity extends AppCompatActivity {
     SeekBar timerCount;
     TextView counter;
 
-    public void timer(int counterInSec) {
-        CountDownTimer countDownTimer = new CountDownTimer(10000, 1000) {
+    public void timer(View view) {
+        int counterInSec = timerCount.getProgress();
+        CountDownTimer countDownTimer = new CountDownTimer(counterInSec * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                updateCounter((int) (millisUntilFinished / 1000));
 
             }
 
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
 
             }
-        };
+        }.start();
     }
 
     @Override
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 updateCounter(progress);
-                timer(progress);
+//                timer(progress);
 
             }
 
