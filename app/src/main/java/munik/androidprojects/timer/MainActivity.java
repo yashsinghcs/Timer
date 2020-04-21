@@ -15,14 +15,15 @@ public class MainActivity extends AppCompatActivity {
     TextView counter;
     MediaPlayer playSound;
     Button startStop;
+    CountDownTimer countDownTimer;
 
     public void timer(View view) {
 
         if (startStop.getText().equals("START!")) {
             startStop.setText("RESET!");
-            int counterInSec = timerCount.getProgress();
             timerCount.setVisibility(View.INVISIBLE);
-            CountDownTimer countDownTimer = new CountDownTimer(counterInSec * 1000, 1000) {
+            int counterInSec = timerCount.getProgress();
+            countDownTimer = new CountDownTimer(counterInSec * 1000, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     updateCounter((int) (millisUntilFinished / 1000));
@@ -35,11 +36,14 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }.start();
+
         } else if (startStop.getText().equals("RESET!")) {
             playSound.stop();
             startStop.setText("START!");
             timerCount.setVisibility(View.VISIBLE);
-
+            counter.setText("00:00");
+            timerCount.setProgress(0);
+            countDownTimer.cancel();
         }
     }
 
