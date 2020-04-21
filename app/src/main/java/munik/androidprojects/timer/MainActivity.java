@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             }.start();
         } else if (startStop.getText().equals("RESET!")) {
             playSound.stop();
+            startStop.setText("START!");
         }
     }
 
