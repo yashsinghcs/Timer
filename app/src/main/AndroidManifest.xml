@@ -7,7 +7,7 @@
         android:icon="@drawable/timerclock"
         android:label="@string/app_name"
         android:roundIcon="@drawable/timerclock"
-        android:supportsRtl="true"
+        android:allowClearUserData="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
