@@ -9,12 +9,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import static munik.androidprojects.timer.R.raw.rooster_times_up;
-
 public class MainActivity extends AppCompatActivity {
     SeekBar timerCount;
     TextView counter;
-    MediaPlayer playSound = MediaPlayer.create(this, rooster_times_up);
+    MediaPlayer playSound;
     public void timer(View view) {
         int counterInSec = timerCount.getProgress();
         CountDownTimer countDownTimer = new CountDownTimer(counterInSec * 1000, 1000) {
@@ -22,11 +20,13 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 updateCounter((int) (millisUntilFinished / 1000));
 
+
             }
 
             @Override
             public void onFinish() {
                 playSound.start();
+                playSound.setLooping(true);
             }
         }.start();
     }
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         timerCount = (SeekBar) findViewById(R.id.timerCount);
         counter = (TextView) findViewById(R.id.counter);
+        playSound = MediaPlayer.create(this, R.raw.rooster_times_up);
         timerCount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
