@@ -1,5 +1,6 @@
 package munik.androidprojects.timer;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -8,10 +9,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import static munik.androidprojects.timer.R.raw.rooster_times_up;
+
 public class MainActivity extends AppCompatActivity {
     SeekBar timerCount;
     TextView counter;
-
+    MediaPlayer playSound = MediaPlayer.create(this, rooster_times_up);
     public void timer(View view) {
         int counterInSec = timerCount.getProgress();
         CountDownTimer countDownTimer = new CountDownTimer(counterInSec * 1000, 1000) {
@@ -23,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-
+                playSound.start();
             }
         }.start();
     }
