@@ -4,6 +4,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -13,22 +14,29 @@ public class MainActivity extends AppCompatActivity {
     SeekBar timerCount;
     TextView counter;
     MediaPlayer playSound;
+    Button startStop;
+
     public void timer(View view) {
-        int counterInSec = timerCount.getProgress();
-        CountDownTimer countDownTimer = new CountDownTimer(counterInSec * 1000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                updateCounter((int) (millisUntilFinished / 1000));
+        if (startStop.getText().equals("START!")) {
+            int counterInSec = timerCount.getProgress();
+            CountDownTimer countDownTimer = new CountDownTimer(counterInSec * 1000, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    updateCounter((int) (millisUntilFinished / 1000));
 
 
-            }
+                }
 
-            @Override
-            public void onFinish() {
-                playSound.start();
-                playSound.setLooping(true);
-            }
-        }.start();
+                @Override
+                public void onFinish() {
+                    playSound.start();
+                    playSound.setLooping(true);
+                    startStop.setText("RESET!");
+                }
+            }.start();
+        } else if (startStop.getText().equals("RESET!")) {
+            playSound.stop();
+        }
     }
 
     @Override
@@ -38,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         timerCount = (SeekBar) findViewById(R.id.timerCount);
         counter = (TextView) findViewById(R.id.counter);
         playSound = MediaPlayer.create(this, R.raw.rooster_times_up);
+        startStop = (Button) findViewById(R.id.startStop);
         timerCount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
