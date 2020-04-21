@@ -17,26 +17,29 @@ public class MainActivity extends AppCompatActivity {
     Button startStop;
 
     public void timer(View view) {
+
         if (startStop.getText().equals("START!")) {
+            startStop.setText("RESET!");
             int counterInSec = timerCount.getProgress();
+            timerCount.setVisibility(View.INVISIBLE);
             CountDownTimer countDownTimer = new CountDownTimer(counterInSec * 1000, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     updateCounter((int) (millisUntilFinished / 1000));
-
-
                 }
 
                 @Override
                 public void onFinish() {
                     playSound.start();
                     playSound.setLooping(true);
-                    startStop.setText("RESET!");
+
                 }
             }.start();
         } else if (startStop.getText().equals("RESET!")) {
             playSound.stop();
             startStop.setText("START!");
+            timerCount.setVisibility(View.VISIBLE);
+
         }
     }
 
